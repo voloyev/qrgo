@@ -20,16 +20,16 @@ func generateQrCodeActio(ctx context.Context, cmd *cli.Command) error {
 
 	qrc, err := qrcode.New(text)
 	if err != nil {
-		return errors.New(fmt.Sprintf("could not generate QRCode: %v", err))
+		return fmt.Errorf("could not generate QRCode: %v", err)
 	}
 
 	w, err := standard.New("repo-qrcode.jpeg")
 	if err != nil {
-		return errors.New(fmt.Sprintf("standard.New failed: %v", err))
+		return fmt.Errorf("standard.New failed: %v", err)
 	}
 
 	if err = qrc.Save(w); err != nil {
-		return errors.New(fmt.Sprintf("could not save image: %v", err))
+		return fmt.Errorf("could not save image: %v", err)
 	}
 
 	return nil
